@@ -1,3 +1,5 @@
+import { validateEmail } from "./email";
+
 export function validateUserInfo(
   name,
   userName,
@@ -23,11 +25,7 @@ export function validateUserInfo(
     setUserNError({ ...userNError, error: true });
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email || !emailRegex.test(email)) {
-    valid = false;
-    setEmailError({ ...emailError, error: true });
-  }
+  valid = validateEmail(email, emailError, setEmailError);
 
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;

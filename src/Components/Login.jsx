@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../style/loginRegister.css";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../functions/apiAuth/loginData";
+import { loginUser } from "../APIs/apiAuth/loginData";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,6 +17,7 @@ const Login = () => {
       setError(err.message);
     }
   };
+
   return (
     <div className="login-layout">
       <div className="login-container">

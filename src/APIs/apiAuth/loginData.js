@@ -1,3 +1,5 @@
+import { saveToken } from "../../functions/helpers/tokens";
+
 const ConnectionString = import.meta.env.VITE_BACKEND_CONNECTION;
 
 export const loginUser = async (email, password) => {
@@ -15,11 +17,7 @@ export const loginUser = async (email, password) => {
   if (!response.ok) {
     throw new Error("wrong email or password");
   }
-  localStorage.setItem("token", data.token);
-  localStorage.setItem("tokenExpiration", data.expiration);
+  saveToken(data.token, data.expiration);
 
   return response.json();
-};
-export const getToken = () => {
-  return localStorage.getItem("token");
 };

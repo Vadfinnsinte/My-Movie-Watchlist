@@ -40,7 +40,12 @@ const Register = () => {
     );
     if (!valid) return;
   };
-
+  const resetErrors = () => {
+    setEmailError({ ...emailError, error: false });
+    setNameError({ ...nameError, error: false });
+    setPasswordError({ ...passwordError, error: false });
+    setUserNError({ ...userNError, error: false });
+  };
   return (
     <>
       <div className="login-layout">
@@ -57,7 +62,10 @@ const Register = () => {
               <input
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  resetErrors();
+                }}
               />
 
               <label>
@@ -69,7 +77,10 @@ const Register = () => {
               <input
                 type="text"
                 value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                  resetErrors();
+                }}
               />
               <label>
                 Email*{" "}
@@ -80,7 +91,10 @@ const Register = () => {
               <input
                 type="text"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  resetErrors();
+                }}
               />
               <label>
                 Password*{" "}
@@ -91,7 +105,10 @@ const Register = () => {
               <input
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  resetErrors();
+                }}
               />
             </div>
 
