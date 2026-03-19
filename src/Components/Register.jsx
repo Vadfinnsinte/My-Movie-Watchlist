@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { validateUserInfo } from "../functions/validation/registration";
+import { registerUser } from "../APIs/apiAuth/registerUserData";
+import { loginUser } from "../APIs/apiAuth/loginData";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [nameError, setNameError] = useState({
     error: false,
     message: "Name must be 3–100 chars",
@@ -22,8 +26,9 @@ const Register = () => {
     error: false,
     message: "Min 8 chars, 1 upper, 1 lower, 1 number, 1 special",
   });
+  const navigate = useNavigate();
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     let valid = validateUserInfo(
       name,
       userName,
@@ -39,6 +44,16 @@ const Register = () => {
       setPasswordError,
     );
     if (!valid) return;
+
+    try {
+      await registerUser(name, userName, email, password);
+
+      await loginUser(email, password);
+
+      navigate("/home");
+    } catch (err) {
+      setError(err.message);
+    }
   };
   const resetErrors = () => {
     setEmailError({ ...emailError, error: false });

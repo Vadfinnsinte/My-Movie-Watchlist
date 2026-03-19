@@ -13,11 +13,15 @@ export const loginUser = async (email, password) => {
       password: password,
     }),
   });
-
+  const data = await response.json();
   if (!response.ok) {
-    throw new Error("wrong email or password");
+    if (response.status === 500) {
+      throw new Error("Server error, try again later");
+    } else {
+      throw new Error("Incorrect email or password");
+    }
   }
   saveToken(data.token, data.expiration);
 
-  return response.json();
+  return data;
 };

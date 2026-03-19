@@ -15,7 +15,7 @@ const Header = () => {
         Home
       </NavLink>
       <NavLink className="navlink" to="/" onClick={handleLogout}>
-        Log Out
+        Sign Out
       </NavLink>
     </div>
   );
