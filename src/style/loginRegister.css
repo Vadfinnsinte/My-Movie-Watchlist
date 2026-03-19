@@ -1,0 +1,52 @@
+.login-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container {
+  margin: auto;
+  background: linear-gradient(
+    120deg,
+    rgba(124, 58, 237, 1) 0%,
+    rgba(255, 255, 255, 0.35) 45%,
+    rgba(124, 58, 237, 1) 100%
+  );
+  margin-top: 3rem;
+  padding: 2rem 5rem 5rem 5rem;
+  border-radius: 2rem;
+
+  h1 {
+    text-align: center;
+  }
+
+  div {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    label {
+      margin: 0.5rem 0 0.3rem 0;
+    }
+  }
+  button {
+    margin-top: 1rem;
+  }
+
+  .none {
+    visibility: hidden;
+    margin: 5px 0 0 0;
+    font-size: 14px;
+  }
+  .visible {
+    visibility: visible;
+    color: brown;
+    margin: 5px 0 0 0;
+    font-size: 14px;
+  }
+}
+.register-link {
+  margin: auto;
+  span {
+    text-decoration: underline;
+    color: rgba(124, 58, 237, 1);
+  }
+}
