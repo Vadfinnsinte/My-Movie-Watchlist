@@ -2,15 +2,26 @@ import { useState } from "react";
 import "../style/homepage.css";
 import { FiInfo } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
-
+import { getData, searchMovies } from "../functions/data";
+import RenderMovieCards from "./RenderMovieCards";
 const HomePage = () => {
   const [showInfo, setShowInfo] = useState(false);
-  const [searchValue, setSearshValue] = useState("");
+  const [searchResults, setSearchResults] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [renderResult, setRenderReslut] = useState(false);
 
-  const onInput = (e) => {
-    setSearshValue(e.target.value);
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query.length > 1) {
+      searchMovies(query, setSearchResults);
+      setRenderReslut(true);
+      console.log(searchResults);
+    } else {
+      setSearchResults([]);
+    }
   };
-
   return (
     <div className="homepage-layout">
       <section className="welcome-section">
@@ -35,11 +46,14 @@ const HomePage = () => {
           <input
             type="text"
             placeholder="search"
-            value={searchValue}
-            onChange={onInput}
+            onChange={handleSearch}
+            value={searchQuery}
           />
         </div>
-        {/* add consitional that renders creator choise, active search or recently searched movies(use local to save and fetch id or save full titles). */}
+        <section className="movies-layout">
+          {renderResult && <RenderMovieCards movies={searchResults} />}
+          {/* add consitional that renders creator choise, active search or recently searched movies(use local to save and fetch id or save full titles). */}
+        </section>
       </section>
     </div>
   );

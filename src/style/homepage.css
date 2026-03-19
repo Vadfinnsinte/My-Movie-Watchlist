@@ -35,11 +35,30 @@
 }
 .search-section {
   margin: auto;
+  width: 90%;
 }
 .search-container {
   display: flex;
+  margin-bottom: 1rem;
+  place-self: center;
 }
 .search-icon {
   font-size: 20px;
   place-self: center;
+}
+.movies-layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 2px 5px;
+  border-radius: 6px;
+}
+
+.movie-card-title {
+  margin-bottom: 0;
 }
