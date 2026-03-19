@@ -1,0 +1,64 @@
+.homepage-layout {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+}
+
+.welcome-section {
+  margin: auto;
+  text-align: center;
+  padding-top: 1rem;
+}
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  div {
+    cursor: pointer;
+  }
+}
+.info-box {
+  position: absolute;
+  background: linear-gradient(
+    120deg,
+    rgba(124, 58, 237, 1) 0%,
+    rgba(255, 255, 255) 45%,
+    rgba(124, 58, 237, 1) 100%
+  );
+  font-size: 15px;
+  padding: 1rem;
+  max-width: 20rem;
+  place-self: center;
+  border-radius: 10px;
+}
+.search-section {
+  margin: auto;
+  width: 90%;
+}
+.search-container {
+  display: flex;
+  margin-bottom: 1rem;
+  place-self: center;
+}
+.search-icon {
+  font-size: 20px;
+  place-self: center;
+}
+.movies-layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 2px 5px;
+  border-radius: 6px;
+}
+
+.movie-card-title {
+  margin-bottom: 0;
+}

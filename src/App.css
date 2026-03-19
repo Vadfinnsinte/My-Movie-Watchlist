@@ -1,3 +1,17 @@
 body {
   margin: 0;
+  background-color: rgb(249, 239, 252);
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.navlink {
+  text-decoration: none;
+  color: rgb(14, 12, 12);
+  font-size: 20px;
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 20px;
 }
