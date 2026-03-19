@@ -3,6 +3,7 @@ import App from "../App";
 import HomePage from "../Components/HomePage";
 import MyMovies from "../Components/MyMovies";
 import Login from "../Components/Login";
+import Register from "../Components/Register";
 
 const router = createHashRouter([
   {
@@ -12,6 +13,10 @@ const router = createHashRouter([
       {
         path: "/",
         element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/home",

@@ -1,0 +1,106 @@
+import { useState } from "react";
+import { validateUserInfo } from "../functions/validation/registration";
+
+const Register = () => {
+  const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nameError, setNameError] = useState({
+    error: false,
+    message: "Name must be 3–100 chars",
+  });
+  const [userNError, setUserNError] = useState({
+    error: false,
+    message: "Must be 3–50 chars",
+  });
+  const [emailError, setEmailError] = useState({
+    error: false,
+    message: "Invalid email",
+  });
+  const [passwordError, setPasswordError] = useState({
+    error: false,
+    message: "Min 8 chars, 1 upper, 1 lower, 1 number, 1 special",
+  });
+
+  const handleRegister = () => {
+    let valid = validateUserInfo(
+      name,
+      userName,
+      email,
+      password,
+      nameError,
+      setNameError,
+      userNError,
+      setUserNError,
+      emailError,
+      setEmailError,
+      passwordError,
+      setPasswordError,
+    );
+    if (!valid) return;
+  };
+
+  return (
+    <>
+      <div className="login-layout">
+        <div className="login-container">
+          <h1>Register</h1>
+          <div>
+            <div>
+              <label>
+                Name*{" "}
+                <span className={nameError.error ? "visible" : "none"}>
+                  {nameError.message}
+                </span>
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+
+              <label>
+                UserName*
+                <span className={userNError.error ? "visible" : "none"}>
+                  {userNError.message}
+                </span>
+              </label>
+              <input
+                type="text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+              <label>
+                Email*{" "}
+                <span className={emailError.error ? "visible" : "none"}>
+                  {emailError.message}
+                </span>
+              </label>
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <label>
+                Password*{" "}
+                <span className={passwordError.error ? "visible" : "none"}>
+                  {passwordError.message}
+                </span>
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <button onClick={handleRegister}>Register</button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Register;
