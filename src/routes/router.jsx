@@ -1,5 +1,7 @@
 import { createHashRouter } from "react-router-dom";
 import App from "../App";
+import HomePage from "../Components/HomePage";
+import MyMovies from "../Components/MyMovies";
 
 const router = createHashRouter([
   {
@@ -7,8 +9,12 @@ const router = createHashRouter([
     element: <App />,
     children: [
       {
-        // path: "",
-        // element: ,
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/my-movies",
+        element: <MyMovies />,
       },
     ],
   },
