@@ -126,9 +126,14 @@ const Register = () => {
                 }}
               />
             </div>
-
+            {/* add loading feedback to user */}
             <button onClick={handleRegister}>Register</button>
           </div>
+        </div>
+        <div className="register-link">
+          <p>
+            Go back to <span onClick={() => navigate("/")}> Sign in</span>
+          </p>
         </div>
       </div>
     </>
