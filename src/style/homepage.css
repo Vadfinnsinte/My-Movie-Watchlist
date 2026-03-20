@@ -54,11 +54,13 @@
 .movie-card {
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
   margin: 2px 5px;
   border-radius: 6px;
 }
-
+.movie-card:hover {
+  box-shadow: 0 0 8px rgba(124, 58, 237, 1);
+}
 .movie-card-title {
   margin-bottom: 0;
 }

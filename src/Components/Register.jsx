@@ -10,6 +10,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
   const [nameError, setNameError] = useState({
     error: false,
     message: "Name must be 3–100 chars",
@@ -46,10 +48,12 @@ const Register = () => {
     if (!valid) return;
 
     try {
+      setStatus("Regestering User...");
+      setLoading(true);
       await registerUser(name, userName, email, password);
-
+      setStatus("Signing in user...");
       await loginUser(email, password);
-
+      setLoading(false);
       navigate("/home");
     } catch (err) {
       setError(err.message);
@@ -63,7 +67,7 @@ const Register = () => {
   };
   return (
     <>
-      <div className="login-layout">
+      <div className={`page login-layout ${loading && "blurred"}`}>
         <div className="login-container">
           <h1>Register</h1>
           <div>
@@ -126,7 +130,7 @@ const Register = () => {
                 }}
               />
             </div>
-            {/* add loading feedback to user */}
+
             <button onClick={handleRegister}>Register</button>
           </div>
         </div>
@@ -136,6 +140,13 @@ const Register = () => {
           </p>
         </div>
       </div>
+      {loading && (
+        <div className="overlay">
+          <div className="info-box status-box">
+            <p>{status}</p>
+          </div>
+        </div>
+      )}
     </>
   );
 };
