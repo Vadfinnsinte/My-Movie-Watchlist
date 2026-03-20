@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../style/homepage.css";
 import { FiInfo } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
-import { getData, searchMovies } from "../functions/data";
+import { searchMovies } from "../APIs/movieApi/data";
 import RenderMovieCards from "./RenderMovieCards";
 const HomePage = () => {
   const [showInfo, setShowInfo] = useState(false);
