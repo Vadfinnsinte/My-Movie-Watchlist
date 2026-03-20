@@ -5,6 +5,7 @@ import MyMovies from "../Components/MyMovies";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
 import ProtectedRoute from "../Components/ProtectedRoute";
+import MovieDetails from "../Components/MovieDetails";
 
 const router = createHashRouter([
   {
@@ -32,6 +33,14 @@ const router = createHashRouter([
         element: (
           <ProtectedRoute>
             <MyMovies />{" "}
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/movie-details",
+        element: (
+          <ProtectedRoute>
+            <MovieDetails />{" "}
           </ProtectedRoute>
         ),
       },
