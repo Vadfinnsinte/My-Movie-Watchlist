@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { deleteMovie, updateMovie } from "../APIs/myMoviesAPI/watchlist";
 
-const MovieDetailCard = ({ movies, activeTab, onDelete }) => {
+const MovieDetailCard = ({ movies, activeTab, onDelete, onMove }) => {
   const [id, setId] = useState("");
   const [comment, setComment] = useState("");
   const [openEdit, setOpenEdit] = useState(false);
+  const [title, setTitle] = useState("");
   const btnTxt = activeTab === "watchlist" ? "watched" : "watchlist";
 
   const handleDelete = async (id) => {
-    console.log(id);
-
     try {
       await deleteMovie(id);
       onDelete(id);
@@ -18,9 +17,13 @@ const MovieDetailCard = ({ movies, activeTab, onDelete }) => {
     }
   };
   const handleMove = async () => {
-    const watched = activeTab === "watchlist" ? "watchlist" : "watched";
+    const watched = activeTab === "watchlist" ? true : false;
     try {
       await updateMovie(id, comment, watched);
+
+      await onMove();
+
+      setOpenEdit(false);
     } catch (err) {
       console.log(err.message);
     }
@@ -46,7 +49,8 @@ const MovieDetailCard = ({ movies, activeTab, onDelete }) => {
                 <button
                   onClick={() => {
                     setId(movie.id);
-                    setComment(movie.comment);
+                    setComment(movie.comments);
+                    setTitle(movie.title);
                     setOpenEdit(true);
                   }}
                 >
@@ -62,6 +66,7 @@ const MovieDetailCard = ({ movies, activeTab, onDelete }) => {
       ))}
       {openEdit && (
         <div className="info-box box-padding">
+          <h1>{title}</h1>
           <label htmlFor="comment">Want to add/edit a comment?</label>
           <textarea
             id="comment"

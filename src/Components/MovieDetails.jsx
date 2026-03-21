@@ -14,7 +14,6 @@ const MovieDetails = () => {
   const movie = location.state?.movie;
 
   if (!movie) return <p>No movie data</p>;
-  console.log(movie);
 
   // add box that something went WrongLocation, add delay and go back to movies
   useEffect(() => {

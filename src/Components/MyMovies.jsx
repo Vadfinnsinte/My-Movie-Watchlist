@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Watchlist from "./Watchlist";
-import Watched from "./Watched";
+
 import { getUserWatchlist } from "../APIs/myMoviesAPI/watchlist";
 import MovieDetailCard from "./MovieDetailCard";
 
@@ -27,6 +26,16 @@ const MyMovies = () => {
   const handleRemoveMovie = (id) => {
     setWachtlistMovies((prev) => prev.filter((m) => m.id !== id));
     setWatchedMovies((prev) => prev.filter((m) => m.id !== id));
+  };
+  const handleMoveMovie = async () => {
+    try {
+      let inWatchlist = await getUserWatchlist();
+
+      setWatchedMovies(inWatchlist.filter((m) => m.watched));
+      setWachtlistMovies(inWatchlist.filter((m) => !m.watched));
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
@@ -55,12 +64,14 @@ const MyMovies = () => {
                 movies={watchlistMovies}
                 activeTab={activeTab}
                 onDelete={handleRemoveMovie}
+                onMove={handleMoveMovie}
               />
             ) : (
               <MovieDetailCard
                 movies={watchedMovies}
                 activeTab={activeTab}
                 onDelete={handleRemoveMovie}
+                onMove={handleMoveMovie}
               />
             )}
           </div>
