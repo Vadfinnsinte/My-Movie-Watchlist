@@ -1,27 +1,42 @@
-import { useState } from "react";
-import "../style/homepage.css";
+import { useEffect, useState } from "react";
+
 import { FiInfo } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
-import { searchMovies } from "../APIs/movieApi/data";
+import { getData, searchMovies } from "../APIs/movieTMDBApi/data";
 import RenderMovieCards from "./RenderMovieCards";
+
 const HomePage = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [searchResults, setSearchResults] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [renderResult, setRenderReslut] = useState(false);
-
+  const [popularMovies, setpopularMovies] = useState([]);
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-
+    if (query === "") {
+      setSearchResults(popularMovies);
+      return;
+    }
     if (query.length > 1) {
       searchMovies(query, setSearchResults);
       setRenderReslut(true);
-      console.log(searchResults);
     } else {
       setSearchResults([]);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let popularMoviesData = await getData();
+      setpopularMovies(popularMoviesData.results);
+      setSearchResults(popularMoviesData.results);
+      setRenderReslut(true);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="homepage-layout">
       <section className="welcome-section">
@@ -52,7 +67,6 @@ const HomePage = () => {
         </div>
         <section className="movies-layout">
           {renderResult && <RenderMovieCards movies={searchResults} />}
-          {/* add consitional that renders creator choise, active search or recently searched movies(use local to save and fetch id or save full titles). */}
         </section>
       </section>
     </div>
