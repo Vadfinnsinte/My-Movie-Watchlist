@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { FiInfo } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
-import { getData, searchMovies } from "../APIs/movieApi/data";
+import { getData, searchMovies } from "../APIs/movieTMDBApi/data";
 import RenderMovieCards from "./RenderMovieCards";
 
 const HomePage = () => {

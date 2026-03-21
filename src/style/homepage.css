@@ -19,20 +19,7 @@
     cursor: pointer;
   }
 }
-.info-box {
-  position: absolute;
-  background: linear-gradient(
-    120deg,
-    rgba(124, 58, 237, 1) 0%,
-    rgba(255, 255, 255) 45%,
-    rgba(124, 58, 237, 1) 100%
-  );
-  font-size: 15px;
-  padding: 1rem;
-  max-width: 20rem;
-  place-self: center;
-  border-radius: 10px;
-}
+
 .search-section {
   margin: auto;
   width: 90%;

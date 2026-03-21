@@ -1,12 +1,54 @@
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import {
+  addToWatchlist,
+  getUserWatchlist,
+} from "../APIs/myMoviesAPI/watchlist";
 
 const MovieDetails = () => {
+  const [comments, setComments] = useState("");
+  const [watched, setWatched] = useState(false);
+  const [buttonTxt, setButtonTxt] = useState("Add to watchlist");
+  const [adding, setAdding] = useState(false);
   const location = useLocation();
   const movie = location.state?.movie;
-  console.log(movie);
 
   if (!movie) return <p>No movie data</p>;
+  console.log(movie);
+
   // add box that something went WrongLocation, add delay and go back to movies
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let inWatchlist = await getUserWatchlist();
+        let exist = inWatchlist.some((m) => m.tmdbMovieID === movie.id);
+        setAdding(exist);
+        setButtonTxt("in watchlist");
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const handleAddMovie = async () => {
+    setAdding(true);
+    setButtonTxt("Adding...");
+    try {
+      await addToWatchlist(
+        movie.title,
+        movie.poster_path,
+        movie.overview,
+        movie.id,
+        comments,
+        watched,
+      );
+
+      setButtonTxt("in watchlist");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   return (
     <div className="movie-details-layout">
@@ -22,14 +64,30 @@ const MovieDetails = () => {
             alt={movie.title}
           />
 
-          <textarea placeholder="personal comments" className="big-input" />
+          <textarea
+            placeholder="personal comments"
+            className="big-input"
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
+          />
 
           <div className="check-btn">
             <div className="check">
-              <label>Watched</label>
-              <input type="checkbox" />
+              <label htmlFor="watchedMovie">Watched</label>
+              <input
+                id="watchedMovie"
+                type="checkbox"
+                value={watched}
+                onChange={() => setWatched(!watched)}
+              />
             </div>
-            <button>Add to watchlist</button>
+            <button
+              className={`btn ${adding ? "btn-disabled" : ""}`}
+              disabled={adding}
+              onClick={handleAddMovie}
+            >
+              {buttonTxt}
+            </button>
           </div>
         </div>
       </div>

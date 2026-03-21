@@ -21,6 +21,14 @@
   justify-content: space-between;
   margin: 0 3rem;
 }
+.check-btn .btn-disabled {
+  background-color: #a18df0;
+  cursor: not-allowed;
+}
+.btn-disabled:hover {
+  box-shadow: none;
+}
+
 .check {
   display: flex;
   flex-direction: row;
