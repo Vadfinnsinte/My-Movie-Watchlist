@@ -13,10 +13,12 @@ export const registerUser = async (name, userName, email, password) => {
     }),
   });
   const data = await response.json();
-
   if (!response.ok) {
-    throw new Error(data?.message || "Registration failed");
+    if (response.status === 500) {
+      throw new Error("Server error, try again later");
+    } else {
+      throw new Error(data?.message || "Registration failed");
+    }
   }
-
   return data;
 };
