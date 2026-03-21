@@ -9,14 +9,11 @@
 }
 .tabs {
   display: flex;
-  justify-content: space-around;
 }
 .tab {
-  /* background: rgb(137, 78, 240);
-  padding: 0.6rem 1rem;
-  border: solid 1px rgba(124, 58, 237, 1); */
   background: rgb(137, 78, 240);
   padding: 0.6rem 1rem;
+  flex: 1;
   border: solid 1px rgba(124, 58, 237, 1);
   opacity: 0.6;
   transition: all 0.2s ease;
