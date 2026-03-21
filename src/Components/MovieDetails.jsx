@@ -6,6 +6,7 @@ const MovieDetails = () => {
   console.log(movie);
 
   if (!movie) return <p>No movie data</p>;
+  // add box that something went WrongLocation, add delay and go back to movies
 
   return (
     <div className="movie-details-layout">
