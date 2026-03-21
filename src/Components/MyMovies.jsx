@@ -8,11 +8,11 @@ const MyMovies = () => {
   const [activeTab, setActiveTab] = useState("watchlist");
   const [watchlistMovies, setWachtlistMovies] = useState([]);
   const [watchedMovies, setWatchedMovies] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         let inWatchlist = await getUserWatchlist();
-        console.log(typeof inWatchlist[0].watched);
 
         setWatchedMovies(inWatchlist.filter((m) => m.watched));
         setWachtlistMovies(inWatchlist.filter((m) => !m.watched));
@@ -23,6 +23,12 @@ const MyMovies = () => {
 
     fetchData();
   }, []);
+
+  const handleRemoveMovie = (id) => {
+    setWachtlistMovies((prev) => prev.filter((m) => m.id !== id));
+    setWatchedMovies((prev) => prev.filter((m) => m.id !== id));
+  };
+
   return (
     <>
       <div className="my-move-layout">
@@ -43,11 +49,21 @@ const MyMovies = () => {
               <p>Watched</p>
             </div>
           </div>
-          {activeTab === "watchlist" ? (
-            <MovieDetailCard movies={watchlistMovies} />
-          ) : (
-            <MovieDetailCard movies={watchedMovies} />
-          )}
+          <div className="movies-layout-watchlist">
+            {activeTab === "watchlist" ? (
+              <MovieDetailCard
+                movies={watchlistMovies}
+                activeTab={activeTab}
+                onDelete={handleRemoveMovie}
+              />
+            ) : (
+              <MovieDetailCard
+                movies={watchedMovies}
+                activeTab={activeTab}
+                onDelete={handleRemoveMovie}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>

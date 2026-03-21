@@ -40,3 +40,15 @@ button:hover {
   place-self: center;
   border-radius: 10px;
 }
+/* .span {
+  grid-column: span 2;
+} */
+.start {
+  text-align: start;
+}
+.bold {
+  font-weight: bold;
+}
+.red {
+  background-color: brown;
+}

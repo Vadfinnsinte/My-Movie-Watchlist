@@ -1,14 +1,14 @@
 .my-move-layout {
   display: flex;
-  div {
-    margin: auto;
-  }
-  h1 {
-    text-align: center;
-  }
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
 }
+
 .tabs {
+  margin: auto;
   display: flex;
+  max-width: 40%;
 }
 .tab {
   background: rgb(137, 78, 240);
@@ -36,4 +36,40 @@
   background: rgb(118, 61, 209);
   opacity: 1;
   box-shadow: inset 0 0 12px rgba(230, 227, 227, 0.4);
+}
+.my-movies-width {
+  margin: auto;
+  width: 70%;
+}
+.movies-layout-watchlist {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.movie-card-watchlist {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 2px 5px;
+  border-radius: 6px;
+  img {
+    place-self: center;
+  }
+}
+.no-margin * {
+  margin: 0;
+}
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+.comment {
+  resize: none;
+  width: 100%;
+  height: 10rem;
+  margin-top: 2rem;
+}
+.box-padding {
+  padding: 4rem;
 }

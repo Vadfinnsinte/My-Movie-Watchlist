@@ -1,45 +1,83 @@
-const MovieDetailCard = ({ movies }) => {
-  return movies.map((movie) => (
-    <div className="movie-details-layout">
-      <div className="movie-details-card">
-        <div>
-          <h1>{movie.title}</h1>
-        </div>
-        <p>{movie.overview}</p>
-        <div className="img-input">
-          <img
-            src={`https://image.tmdb.org/t/p/w300${movie.img}`}
-            alt={movie.title}
-          />
+import { useState } from "react";
+import { deleteMovie, updateMovie } from "../APIs/myMoviesAPI/watchlist";
 
-          <textarea
-            placeholder="personal comments"
-            className="big-input"
-            value={movie.comments}
-            // onChange={(e) => setComments(e.target.value)}
-          />
+const MovieDetailCard = ({ movies, activeTab, onDelete }) => {
+  const [id, setId] = useState("");
+  const [comment, setComment] = useState("");
+  const [openEdit, setOpenEdit] = useState(false);
+  const btnTxt = activeTab === "watchlist" ? "watched" : "watchlist";
 
-          <div className="check-btn">
-            <div className="check">
-              <label htmlFor="watchedMovie">Watched</label>
-              <input
-                id="watchedMovie"
-                type="checkbox"
-                // value={watched}
-                // onChange={() => setWatched(!watched)}
-              />
+  const handleDelete = async (id) => {
+    console.log(id);
+
+    try {
+      await deleteMovie(id);
+      onDelete(id);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  const handleMove = async () => {
+    const watched = activeTab === "watchlist" ? "watchlist" : "watched";
+    try {
+      await updateMovie(id, comment, watched);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  return (
+    <>
+      {movies.map((movie) => (
+        <div key={movie.id} className="my-movies-width">
+          <div className="movie-card-watchlist">
+            <img
+              src={`https://image.tmdb.org/t/p/w200${movie.img}`}
+              alt={movie.title}
+            />
+            <div className="start">
+              <h1>{movie.title}</h1>
+              <p>{movie.description}</p>
+              <div className="no-margin">
+                <p className="bold">Your Comment:</p>
+                <p>{movie.comments}</p>
+              </div>
+              <div className="btn-container">
+                <button
+                  onClick={() => {
+                    setId(movie.id);
+                    setComment(movie.comment);
+                    setOpenEdit(true);
+                  }}
+                >
+                  Move to {btnTxt}
+                </button>
+                <button className="red" onClick={() => handleDelete(movie.id)}>
+                  Remove
+                </button>
+              </div>
             </div>
-            <button
-              className={`btn ${adding ? "btn-disabled" : ""}`}
-              disabled={adding}
-              onClick={handleAddMovie}
-            >
-              {buttonTxt}
+          </div>
+        </div>
+      ))}
+      {openEdit && (
+        <div className="info-box box-padding">
+          <label htmlFor="comment">Want to add/edit a comment?</label>
+          <textarea
+            id="comment"
+            className="comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <div className="btn-container">
+            <button onClick={handleMove}>Move to {btnTxt}</button>
+            <button className="red" onClick={() => setOpenEdit(false)}>
+              Cancel
             </button>
           </div>
         </div>
-      </div>
-    </div>
-  ));
+      )}
+    </>
+  );
 };
 export default MovieDetailCard;

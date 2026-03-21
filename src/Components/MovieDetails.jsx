@@ -23,7 +23,11 @@ const MovieDetails = () => {
         let inWatchlist = await getUserWatchlist();
         let exist = inWatchlist.some((m) => m.tmdbMovieID === movie.id);
         setAdding(exist);
-        setButtonTxt("in watchlist");
+        if (exist) {
+          setButtonTxt("in watchlist");
+        } else {
+          setButtonTxt("Add to watchlist");
+        }
       } catch (err) {
         console.log(err.message);
       }
