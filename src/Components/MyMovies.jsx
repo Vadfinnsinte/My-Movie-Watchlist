@@ -8,16 +8,19 @@ const MyMovies = () => {
   const [watchlistMovies, setWachtlistMovies] = useState([]);
   const [watchedMovies, setWatchedMovies] = useState([]);
 
+  const getData = async () => {
+    try {
+      let inWatchlist = await getUserWatchlist();
+
+      setWatchedMovies(inWatchlist.filter((m) => m.watched));
+      setWachtlistMovies(inWatchlist.filter((m) => !m.watched));
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        let inWatchlist = await getUserWatchlist();
-
-        setWatchedMovies(inWatchlist.filter((m) => m.watched));
-        setWachtlistMovies(inWatchlist.filter((m) => !m.watched));
-      } catch (err) {
-        console.log(err.message);
-      }
+      await getData();
     };
 
     fetchData();
@@ -28,14 +31,7 @@ const MyMovies = () => {
     setWatchedMovies((prev) => prev.filter((m) => m.id !== id));
   };
   const handleMoveMovie = async () => {
-    try {
-      let inWatchlist = await getUserWatchlist();
-
-      setWatchedMovies(inWatchlist.filter((m) => m.watched));
-      setWachtlistMovies(inWatchlist.filter((m) => !m.watched));
-    } catch (err) {
-      console.log(err.message);
-    }
+    await getData();
   };
 
   return (

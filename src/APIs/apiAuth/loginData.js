@@ -15,11 +15,7 @@ export const loginUser = async (email, password) => {
   });
   const data = await response.json();
   if (!response.ok) {
-    if (response.status === 500) {
-      throw new Error("Server error, try again later");
-    } else {
-      throw new Error("Incorrect email or password");
-    }
+    throw new Error("Incorrect email or password");
   }
   saveToken(data.token, data.expiration);
 

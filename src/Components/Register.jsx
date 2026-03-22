@@ -9,7 +9,6 @@ const Register = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [nameError, setNameError] = useState({
@@ -56,7 +55,10 @@ const Register = () => {
       setLoading(false);
       navigate("/home");
     } catch (err) {
-      setError(err.message);
+      setStatus(err.message);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
   const resetErrors = () => {
@@ -68,17 +70,18 @@ const Register = () => {
   return (
     <>
       <div className={`page login-layout ${loading && "blurred"}`}>
-        <div className="login-container">
+        <form className="login-container">
           <h1>Register</h1>
           <div>
             <div>
-              <label>
+              <label htmlFor="name">
                 Name*{" "}
                 <span className={nameError.error ? "visible" : "none"}>
                   {nameError.message}
                 </span>
               </label>
               <input
+                id="name"
                 type="text"
                 value={name}
                 onChange={(e) => {
@@ -87,13 +90,14 @@ const Register = () => {
                 }}
               />
 
-              <label>
-                UserName*
+              <label htmlFor="username">
+                Username*
                 <span className={userNError.error ? "visible" : "none"}>
                   {userNError.message}
                 </span>
               </label>
               <input
+                id="username"
                 type="text"
                 value={userName}
                 onChange={(e) => {
@@ -101,13 +105,14 @@ const Register = () => {
                   resetErrors();
                 }}
               />
-              <label>
+              <label htmlFor="email">
                 Email*{" "}
                 <span className={emailError.error ? "visible" : "none"}>
                   {emailError.message}
                 </span>
               </label>
               <input
+                id="email"
                 type="text"
                 value={email}
                 onChange={(e) => {
@@ -115,13 +120,14 @@ const Register = () => {
                   resetErrors();
                 }}
               />
-              <label>
+              <label htmlFor="password">
                 Password*{" "}
                 <span className={passwordError.error ? "visible" : "none"}>
                   {passwordError.message}
                 </span>
               </label>
               <input
+                id="password"
                 type="password"
                 value={password}
                 onChange={(e) => {
@@ -133,7 +139,7 @@ const Register = () => {
 
             <button onClick={handleRegister}>Register</button>
           </div>
-        </div>
+        </form>
         <div className="register-link">
           <p>
             Go back to <span onClick={() => navigate("/")}> Sign in</span>

@@ -28,16 +28,17 @@ const Login = () => {
 
   return (
     <div className="login-layout">
-      <div className="login-container">
+      <form className="login-container">
         <h1>Sign in</h1>
         <div>
-          <label>
+          <label htmlFor="email">
             Email{" "}
             <span className={emailError.error ? "visible" : "none"}>
               {emailError.message}
             </span>
           </label>
           <input
+            id="email"
             value={email}
             type="text"
             onChange={(e) => {
@@ -46,8 +47,9 @@ const Login = () => {
               setEmailError({ ...emailError, error: false });
             }}
           />
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
+            id="password"
             value={password}
             type="password"
             onChange={(e) => {
@@ -58,7 +60,7 @@ const Login = () => {
           <p className={error === "e" ? "none" : "visible"}>{error}</p>
           <button onClick={handleLogin}>Login</button>
         </div>
-      </div>
+      </form>
       <div className="register-link">
         <p>
           Not a user?

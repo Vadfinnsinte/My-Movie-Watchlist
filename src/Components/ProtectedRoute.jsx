@@ -1,10 +1,13 @@
 import { Navigate } from "react-router-dom";
-import { getToken } from "../functions/helpers/tokens";
+import { getToken, getTokenExpiration } from "../functions/helpers/tokens";
 
 const ProtectedRoute = ({ children }) => {
   const token = getToken();
-
-  if (!token) {
+  const tokenExpiration = getTokenExpiration();
+  if (
+    !token ||
+    (tokenExpiration && Date.now() > new Date(tokenExpiration).getTime())
+  ) {
     return <Navigate to="/" replace />;
   }
 
