@@ -1,7 +1,6 @@
 ### My Movie Watchlist - Frontend
 
-Detta är en React-application som låter användare
-
+Detta är en React-application som låter användare:
 - Registrera sig och logga in
 - Söka efter filmer i TMDB:s databas.
 - Lägga till, uppdatera och ta bort filmer från sin watchlist
@@ -11,7 +10,7 @@ Detta är en React-application som låter användare
 
 ```
 git clone <repo-url>
-cd MoviesAPI
+cd My-Movie-Watchlist
 
 ```
 
