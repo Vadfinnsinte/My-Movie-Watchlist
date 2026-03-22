@@ -1,16 +1,53 @@
-# React + Vite
+### My Movie Watchlist - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Detta är en React-application som låter användare:
+- Registrera sig och logga in
+- Söka efter filmer i TMDB:s databas.
+- Lägga till, uppdatera och ta bort filmer från sin watchlist
+- Se sin personliga watchlist
 
-Currently, two official plugins are available:
+1. Clona projectet
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```
+git clone <repo-url>
+cd My-Movie-Watchlist
 
-## React Compiler
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Installera beroenden
 
-## Expanding the ESLint configuration
+```
+npm install
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+
+3. Skapa en .env fil
+
+```
+VITE_TMDB_API_KEY=<API-Nyckel>
+VITE_BACKEND_CONNECTION=<Backend-Localhost>
+
+```
+
+4. Starta Backend API :
+
+- Följ instruktionerna i README https://github.com/Vadfinnsinte/MovieWatchlistAPI
+
+5. Öppna webbläsaren på: http://localhost:5173
+
+## Credits
+
+This project uses The Movie Database (TMDB) API.  
+Movie data and images are provided by [TMDB](https://www.themoviedb.org/).  
+All rights belong to TMDB and its contributors.
+
+## Förbättrings möjligheter
+
+1. Flytta TMDB requests till backend.
+2. Lägga mycket mer tid på style och conditional rendering.
+3. Ta bort Header från login och register. Även flytta logga ut från headern.
+4. Lägga till hantering av User.
+5. Bättre struktur på komponenterna och functionerna.
+6. Gå igenom och refrakturera CSS-filerna så att jag har mindre upprepningar.
+7. Lägga till state-hanterare (Zustand).
+8. Hantera token på ett säkrare och mer effektivt sätt. Undvika att lagra dem i sessionStorage och implementera förnyelse av token när den närmar sig utgång.
