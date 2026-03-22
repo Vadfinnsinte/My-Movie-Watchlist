@@ -10,7 +10,7 @@ Detta är en React-application som låter användare:
 
 ```
 git clone <repo-url>
-cd MoviesAPI
+cd My-Movie-Watchlist
 
 ```
 
